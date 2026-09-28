@@ -6,7 +6,7 @@ namespace Hooks {
 		REL::Relocation<std::uintptr_t> getBaseObjectTarget{ REL::ID(34229), 0x48 };
 
 		if (!REL::Pattern<"E8">().match(getBaseObjectTarget.address())) {
-			util::report_and_fail("Failed to validate hook pattern, aborting load.");
+			REX::FAIL("Failed to validate hook pattern, aborting load.");
 		}
 
 		auto& trampoline = REL::GetTrampoline();
