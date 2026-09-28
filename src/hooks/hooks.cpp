@@ -5,11 +5,11 @@ namespace Hooks {
 	{
 		REL::Relocation<std::uintptr_t> getBaseObjectTarget{ REL::ID(34229), 0x48 };
 
-		if (!REL::make_pattern<"E8">().match(getBaseObjectTarget.address())) {
+		if (!REL::Pattern<"E8">().match(getBaseObjectTarget.address())) {
 			util::report_and_fail("Failed to validate hook pattern, aborting load.");
 		}
 
-		auto& trampoline = SKSE::GetTrampoline();
+		auto& trampoline = REL::GetTrampoline();
 		_getBaseObject = trampoline.write_call<5>(getBaseObjectTarget.address(), &GetBaseObject);
 	}
 
